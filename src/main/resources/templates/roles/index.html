@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Roles</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    
+    <h2>Roles</h2>
+
+    <table class="table" th:if="${items.size()>0}" id="datos">
+		<thead>
+			<tr> 
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Operaciones</th>
+			</tr>
+		</thead>
+		<tbody>
+		<!-- Estructira repetitiva para recorrer el listado que viene en
+		variable 'items', esta el el foreach -->
+			<tr th:each="i : ${items}">
+				<td th:text="${i.id}"></td>
+				<td th:text="${i.nombre}"></td>	
+				<td>
+					<a name="" id="" class="btn btn-warning" href="" role="button">Modificar</a>
+					<a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+
+</body>
+</html>
