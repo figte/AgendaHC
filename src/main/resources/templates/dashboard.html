@@ -1,6 +1,8 @@
 <!DOCTYPE >
 <html html xmlns:th="http://www.thymeleaf.org"
-th:include="/layouts/layout::plantilla">
+th:include="/layouts/layout::plantilla"
+th:fragment="plantilla2"
+>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -58,7 +60,7 @@ th:include="/layouts/layout::plantilla">
                 <ul class="navbar-nav pr-4 mr-4" >
                     <li class="nav-item dropdown ">
                         <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <span th:include="this::user"></span>
+                          <span th:if="${user!=null}" th:text="${user}"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="#">editar perfil</a>
@@ -74,18 +76,11 @@ th:include="/layouts/layout::plantilla">
           </nav>
        
         
-       </div>
+    </div>
 
-    <div th:fragment="user">
-        <span th:if="${user!=null}" th:text="${user}"></span>
+    
+    <div  th:fragment="content">
     </div>
     
-    <div  th:fragment="content"></div>
-    
-  
-
-  
-    
-
 </body>
 </html>

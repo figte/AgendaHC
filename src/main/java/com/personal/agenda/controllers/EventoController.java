@@ -1,6 +1,10 @@
 package com.personal.agenda.controllers;
 
+import java.net.http.HttpRequest;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.personal.agenda.idao.IEventoDao;
 import com.personal.agenda.model.Evento;
@@ -19,8 +23,13 @@ public class EventoController{
     IEventoDao dao;
 
     @GetMapping(value="/index")
-    public String getMethodName(Model model) {
+    public String getMethodName(HttpServletRequest request, Model model) {
         model.addAttribute("items",(List<Evento>) dao.findAll());
+
+        HttpSession misession= (HttpSession) request.getSession();
+        model.addAttribute("user", misession.getAttribute("user"));
+        model.addAttribute("idrol", misession.getAttribute("idrol"));
+
         return "eventos/index";
     }
 }

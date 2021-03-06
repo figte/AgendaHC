@@ -2,6 +2,8 @@ package com.personal.agenda.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
 import com.personal.agenda.idao.ICategoriaDao;
@@ -27,8 +29,11 @@ public class CategoriaController {
     ICategoriaDao dao;
 
     @GetMapping(value="/index")
-    public String getMethodName(Model model) {
+    public String getMethodName(HttpServletRequest request, Model model) {
         model.addAttribute("items",(List<Categoria>) dao.findAll());
+        HttpSession misession= (HttpSession) request.getSession();
+        model.addAttribute("user", misession.getAttribute("user"));
+        model.addAttribute("idrol", misession.getAttribute("idrol"));
         return "categorias/index";
     }
     @GetMapping(value="/nuevo")

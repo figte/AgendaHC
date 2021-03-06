@@ -27,13 +27,62 @@ th:include="/layouts/layout::plantilla">
 </head>
 <body>
 
-    <div th:fragment="user">
-        <span th:if="${user!=null}" th:text="${user}"></span>
+    <div  th:fragment="navegacion">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light pr-4">
+            <a class="navbar-brand" href="#">AGENDA</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse mr-4" id="navbarSupportedContent">
+                <ul th:if="${idrol==1}"  class="navbar-nav mr-auto ">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="/eventos/index">Eventos <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categorias/index">Categorias</a>
+                      </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Actividades</a>
+                    </li>
+                </ul>
+        
+                  <ul th:if="${idrol==2}"  class="navbar-nav mr-auto">
+        
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Actividades</a>
+                    </li>
+                  </ul>
+                
+            
+              <form class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav pr-4 mr-4" >
+                    <li class="nav-item dropdown ">
+                        <a  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span th:if="${user!=null}" th:text="${user}"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">editar perfil</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="/logout">Cerrar Session</a>
+                        
+                        </div>
+                      </li>
+                </ul>
+                
+              </form>
+            </div>
+          </nav>
+       
+        
     </div>
+
+  
     
     <div  th:fragment="content" >
         <div class="container">
             <h2 class="text-center">Listado de categorias</h2>
+            <a href="/usuarios/nuevo" class="btn btn-primary my-4">Nuevo</a>
             <table class="table" th:if="${items.size()>0}" id="datos">
                 <thead>
                     <tr> 
