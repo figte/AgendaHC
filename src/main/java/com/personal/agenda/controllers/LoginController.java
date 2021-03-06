@@ -16,6 +16,9 @@ import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import org.springframework.util.DigestUtils;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,13 +45,15 @@ public class LoginController {
 
         String user=request.getParameter("user");
         String pass=request.getParameter("pass");
+        String p=DigestUtils.md5DigestAsHex(pass.getBytes());
+        Usuario u=userService.validUser(user, p);
 
-        Usuario u=userService.validUser(user, pass);
         if(u!=null){
             misession.setAttribute("user",u.getNombre());
             misession.setAttribute("rol", u.getIdrol().getNombre());
             misession.setAttribute("idrol", u.getIdrol().getId());
             model.addAttribute("user", u.getNombre());
+            model.addAttribute("idrol", u.getIdrol().getId());
             return "dashboard";
         }else{
             model.addAttribute("error", "Usuario o Cantraseña incorrecta");
@@ -63,36 +68,6 @@ public class LoginController {
         misession.invalidate();
         return "index";
     }
-    @GetMapping(value="/registrar")
-    public String resgistrar(HttpServletRequest request) {
-        return "usuarios/registro";
-    }
-
-    @PostMapping("/registro")
-    public String registro(HttpServletRequest request,Model m) {
-      Usuario usuario=new Usuario();
-      usuario.setNombre(request.getParameter("nombre"));
-      String pass=request.getParameter("contrasenia");
-      usuario.setContrasenia(pass);
-      Rol rol=rolService.getByIdRol(Integer.parseInt(request.getParameter("rol")));
-      usuario.setIdrol(rol);
-      usuario.setFechavencimiento(new Date());
-
-    try {
-        userService.save(usuario);
-        HttpSession misession= (HttpSession) request.getSession();
-        misession.setAttribute("user",usuario.getNombre());
-        misession.setAttribute("rol", usuario.getIdrol().getNombre());
-        misession.setAttribute("idrol", usuario.getIdrol().getId());
-        m.addAttribute("User", usuario.getNombre());
-        return "dashboard";
-
-    } catch (Exception e) {
-        //TODO: handle exception
-        System.err.println(e.getMessage());
-        return "index";
-    }
-      
-    }
+   
     
 }

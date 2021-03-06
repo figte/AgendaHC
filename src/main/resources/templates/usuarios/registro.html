@@ -29,14 +29,18 @@
     <div class="container">
         <h2 class="text-center">Registro de usuario</h2>
 
-        <form action="/registro" method="POST">
+        <form action="/usuarios/registro" method="POST">
         <div>
             <label for="nombre">Nombre</label>
-            <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Digite su nombre">
+            <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Digite su nombre" required>
         </div>
         <div>
             <label for="contrasenia">Contraseña</label>
-            <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Digite su contraseña">
+            <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Digite su contraseña" required>
+        </div>
+        <div>
+            <label for="imagen">Imagen de perfil</label>
+            <input class="form-control" type="file" name="imagen" id="imagen" placeholder="Seleccione una foto">
         </div>
         <div>
             <label for="nombre">Rol</label>
