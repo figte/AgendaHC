@@ -16,3 +16,8 @@ EJECUCION DEL PROYECTO.
 
     - Una ves se tenga acceso  Spring Boot Tools, deberia reconocer el proyecto y podra iniciar su ejecucion.
 
+- DATOS DE PRUEBA.
+   
+   - puede ver los usuarios registrados desde el servidor de base de datos, pero puede probar directamente con el siguiente usuario: User:Juan, Password:1234
+
+
